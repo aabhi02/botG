@@ -34,4 +34,4 @@ streamlit run app.py
 
 <br>
 
-And your done!!! Ask the BotG any general questions you want and talk to [GOOGLE](https://www.google.com)!
+And your done!!! Ask the BotG any general questions you want and talk to [GOOGLE](https://www.google.com).
