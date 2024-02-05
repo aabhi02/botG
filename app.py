@@ -3,10 +3,24 @@ from botG import query
 
 st.title("Bot G(Powered by Google)")
 
-question = st.text_input(label="Question:", placeholder="Ask me anything general")
+# Initialize chat history
+if "messages" not in st.session_state:
+    st.session_state.messages = []
 
-if question:
-    response = query(question)
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
 
-    st.header("Here's what I found...")
-    st.write(response)
+# Accept user input
+if prompt := st.chat_input("Ask me anything in general..."):
+    # Add user message to chat history
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    # Display user message in chat message container
+    with st.chat_message("user"):
+        st.markdown(prompt)
+
+    # Display assistant response in chat message container
+    with st.chat_message("assistant"):
+        response = st.write_stream(query(prompt))
+    # Add assistant response to chat history
+    st.session_state.messages.append({"role": "assistant", "content": response})
